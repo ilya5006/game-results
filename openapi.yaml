@@ -1,0 +1,49 @@
+openapi: 3.0.0
+info:
+  title: REST API сервис для сохранения результатов прохождения игры.
+  version: 1.0.0
+paths:
+  /results:
+    get:
+      summary: Получение информации о лучших 10 результатах
+      parameters:
+        - name: email
+          in: query
+          description: Email, для которого будет возвращена информация
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Успешный запрос
+          content:
+            application/json:
+              example:
+                data:
+                  top:
+                    - email: "user@example.com"
+                      place: 1
+                      milliseconds: 500
+                    - email: "another_user@example.com"
+                      place: 2
+                      milliseconds: 600
+                    # ... и так далее
+                    - email: "another_user10@example.com"
+                      place: 10
+                      milliseconds: 10000
+                  self:
+                    email: "user@example.com"
+                    place: 3
+                    milliseconds: 700
+    post:
+      summary: Добавление результата о новом результате
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              email: "user@example.com"
+              milliseconds: 700
+      responses:
+        '200':
+          description: Результат успешно добавлен

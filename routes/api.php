@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ResultController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -18,6 +20,6 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::post('/save', function (Request $request) {
-    
-});
+Route::post('/results', [ResultController::class, 'saveResults']);
+
+Route::get('/results', [ResultController::class, 'getResults']);
